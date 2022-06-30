@@ -32,6 +32,13 @@ const config: HardhatUserConfig = {
       gas: 2100000,
       gasPrice: 8000000000,
     },
+    polygon: {
+      url: process.env.POLYGON_URL || "",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      gas: 2100000,
+      gasPrice: 80000000000,
+    },
     bsc_testnet: {
       url: process.env.BSC_TESTNET_URL || "",
       chainId: 97,
@@ -52,7 +59,7 @@ const config: HardhatUserConfig = {
     currency: "USD",
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY,
+    apiKey: process.env.ETHERSCAN_POLYGON_API_KEY,
   },
 };
 

@@ -44,3 +44,22 @@ npx hardhat verify --network ropsten DEPLOYED_CONTRACT_ADDRESS "Hello, Hardhat!"
 # Performance optimizations
 
 For faster runs of your tests and scripts, consider skipping ts-node's type checking by setting the environment variable `TS_NODE_TRANSPILE_ONLY` to `1` in hardhat's environment. For more details see [the documentation](https://hardhat.org/guides/typescript.html#performance-optimizations).
+
+# Workflow
+
+1. `npx hardhat run scripts/run.ts` - test run
+2. `npx hardhat run scripts/deploy.ts --network rinkeby` - deploy to a given network
+3. `npx hardhat verify --network rinkeby DEPLOYED_CONTRACT_ADDRESS` - verify
+
+# Deployed contracts:
+
+## Ethereum
+
+### Rinkeby
+1. `0xAb154a0F1249581260f88eDD27685A8eC2c58De8` - placeholder NFT with off-chain emoji image
+2. `0x41382Ed60d630e5dd639fEB86fC4DBD24043f784` - placeholder NFT with dynamically generated SVG
+
+## Polygon
+
+### Mainnet
+1. `0xb60D106AaEcB846Dfd35632f7454E5e7d4FB69fe` - placeholder NFT
