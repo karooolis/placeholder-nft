@@ -55,7 +55,7 @@ For faster runs of your tests and scripts, consider skipping ts-node's type chec
 
 ## Ethereum
 
-### Rinkeb
+### Rinkeby
 1. `0xAb154a0F1249581260f88eDD27685A8eC2c58De8` - placeholder NFT with off-chain emoji image
 2. `0x41382Ed60d630e5dd639fEB86fC4DBD24043f784` - placeholder NFT with dynamically generated SVG 👈
 

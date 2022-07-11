@@ -31,15 +31,15 @@ async function main() {
 
   const PlaceholderNFT = await ethers.getContractFactory("PlaceholderNFT");
 
-  console.log("yoo 1");
+  console.log("Get contract factory ✅");
 
   const placeholderNFT = await PlaceholderNFT.deploy();
 
-  console.log("yoo 2");
+  console.log("Initiate contract deployment ✅");
 
   await placeholderNFT.deployed();
 
-  console.log("yoo 3");
+  console.log("Contract deployed ✅");
 
   console.log("PlaceholderNFT deployed to:", placeholderNFT.address);
 }

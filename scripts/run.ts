@@ -1,23 +1,23 @@
 import { ethers } from "hardhat";
 
 const main = async () => {
-  const nftContractFactory = await ethers.getContractFactory('PlaceholderNFT');
+  const nftContractFactory = await ethers.getContractFactory("PlaceholderNFT");
   const nftContract = await nftContractFactory.deploy();
   await nftContract.deployed();
   console.log("Contract deployed to:", nftContract.address);
 
   // Call the function.
-  let txn = await nftContract.mint(1)
+  let txn = await nftContract.mint(1);
   // Wait for it to be mined.
-  await txn.wait()
+  await txn.wait();
 
   // Mint another NFT for fun.
-  txn = await nftContract.mint(5)
+  txn = await nftContract.mint(5);
   // Wait for it to be mined.
-  await txn.wait()
+  await txn.wait();
 
-  const total = await nftContract.total();
-  console.log('Total: ', total);
+  // const total = await nftContract.total();
+  // console.log('Total: ', total);
 };
 
 const runMain = async () => {
