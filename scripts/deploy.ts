@@ -29,7 +29,9 @@ async function main() {
 
   // console.log("NFTFactory deployed to:", nftFactory.address);
 
-  const PlaceholderNFT = await ethers.getContractFactory("PlaceholderNFT");
+  const PlaceholderNFT = await ethers.getContractFactory(
+    "NFTPlaceholderERC721"
+  );
 
   console.log("Get contract factory ✅");
 
