@@ -5,45 +5,24 @@
 // Runtime Environment's members available in the global scope.
 import { ethers } from "hardhat";
 
+const CONTRACT_TYPES = ["ERC721", "ERC721A", "ERC1155"];
+
 async function main() {
-  // Hardhat always runs the compile task when running scripts with its command
-  // line interface.
-  //
-  // If this script is run directly using `node` you may want to call compile
-  // manually to make sure everything is compiled
-  // await hre.run('compile');
+  console.log(`\n⛓  ${process.env.HARDHAT_NETWORK}:`);
 
-  // We get the contract to deploy
-  // const Greeter = await ethers.getContractFactory("Greeter");
-  // const greeter = await Greeter.deploy("Hello, Hardhat!");
+  for (const contractType of CONTRACT_TYPES) {
+    const contractName = `PlaceholderNFT${contractType}`;
+    const ContractFactory = await ethers.getContractFactory(contractName);
+    console.log(`🏗  Get ${contractType} contract factory`);
 
-  // await greeter.deployed();
+    const contractInstance = await ContractFactory.deploy();
+    console.log(`⏳ Initiate ${contractType} contract deployment`);
 
-  // console.log("Greeter deployed to:", greeter.address);
-
-  // We get the contract to deploy
-  // const NFTFactory = await ethers.getContractFactory("NFTFactory");
-  // const nftFactory = await NFTFactory.deploy();
-
-  // await nftFactory.deployed();
-
-  // console.log("NFTFactory deployed to:", nftFactory.address);
-
-  const PlaceholderNFT = await ethers.getContractFactory(
-    "NFTPlaceholderERC721"
-  );
-
-  console.log("Get contract factory ✅");
-
-  const placeholderNFT = await PlaceholderNFT.deploy();
-
-  console.log("Initiate contract deployment ✅");
-
-  await placeholderNFT.deployed();
-
-  console.log("Contract deployed ✅");
-
-  console.log("PlaceholderNFT deployed to:", placeholderNFT.address);
+    await contractInstance.deployed();
+    console.log(
+      `✅ ${contractName} deployed to: ${contractInstance.address}\n`
+    );
+  }
 }
 
 // We recommend this pattern to be able to use async/await everywhere

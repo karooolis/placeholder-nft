@@ -1,28 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
+import "erc721a/contracts/ERC721A.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/utils/Base64.sol";
 
-contract NFTPlaceholderERC721 is ERC721URIStorage {
-    using Counters for Counters.Counter;
-    Counters.Counter private _tokenIds;
+contract PlaceholderNFTERC721A is ERC721A {
+    constructor() ERC721A("Placeholder NFT (ERC721A)", "PNFT-ERC721A") {}
 
-    constructor() ERC721("NFT Placeholder", "NFTP") {}
-
-    function mint(uint256 quantity) public {
-        for (uint256 i; i < quantity; i++) {
-            // Get the current tokenId, this starts at 0.
-            uint256 newItemId = _tokenIds.current();
-
-            // Mint the NFT to the sender using msg.sender.
-            _safeMint(msg.sender, newItemId);
-
-            // Increment the counter for when the next NFT is minted.
-            _tokenIds.increment();
-        }
+    function mint(uint256 quantity) external {
+        _mint(msg.sender, quantity);
     }
 
     function tokenURI(uint256 tokenId)
@@ -32,7 +19,7 @@ contract NFTPlaceholderERC721 is ERC721URIStorage {
         override
         returns (string memory)
     {
-        _requireMinted(tokenId);
+        if (!_exists(tokenId)) revert URIQueryForNonexistentToken();
 
         // Get all the JSON metadata in place and base64 encode it.
         string memory json = Base64.encode(
@@ -42,7 +29,7 @@ contract NFTPlaceholderERC721 is ERC721URIStorage {
                         '{"name": "',
                         string(
                             abi.encodePacked(
-                                "Placeholder NFT (ERC721) #",
+                                "Placeholder NFT (ERC721A) #",
                                 Strings.toString(tokenId)
                             )
                         ),

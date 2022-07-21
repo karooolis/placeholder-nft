@@ -7,14 +7,14 @@ import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol";
 import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Burnable.sol";
 
-contract NFTPlaceholderERC1155 is ERC1155, ERC1155Burnable {
+contract PlaceholderNFTERC1155 is ERC1155, ERC1155Burnable {
     uint256 public constant PLACEHOLDER_NFT = 1;
     string public name;
     string public symbol;
 
     constructor() ERC1155("") {
-        name = "NFT Placeholder";
-        symbol = "NFTP";
+        name = "Placeholder NFT (ERC1155)";
+        symbol = "PNFT-ERC1155";
     }
 
     function mint(uint256 amount) public {
