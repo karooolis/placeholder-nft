@@ -19,7 +19,8 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   }
 });
 
-const accounts = process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [];
+const accounts =
+  process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [];
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
@@ -132,7 +133,7 @@ const config: HardhatUserConfig = {
     currency: "USD",
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_POLYGON_API_KEY,
+    apiKey: process.env.POLYGON_ETHERSCAN_API_KEY,
   },
 };
 
