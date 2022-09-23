@@ -61,7 +61,7 @@ describe("ERC721", () => {
       "Incorrect metadata description set."
     );
 
-    expect(isSvg(svgImage)).to.be.true("Image is not SVG type.");
+    expect(isSvg(svgImage)).to.eq(true, "Image is not SVG type.");
   });
 
   it("Throw error if non-existant token ID is being queried", async () => {
