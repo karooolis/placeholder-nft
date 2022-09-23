@@ -7,7 +7,6 @@ describe("ERC721", () => {
   const deployFixture = async () => {
     // Contracts are deployed using the first signer/account by default
     const [owner, otherAccount] = await ethers.getSigners();
-
     const ERC721 = await ethers.getContractFactory("PlaceholderNFTERC721");
     const erc721 = await ERC721.deploy();
 
@@ -23,7 +22,6 @@ describe("ERC721", () => {
     // Name and symbol set correctly
     const name = await erc721.name();
     const symbol = await erc721.symbol();
-
     expect(name).to.eq("Placeholder NFT (ERC721)", "Name not set correctly.");
     expect(symbol).to.eq("PNFT-ERC721", "Symbol not set correctly.");
   });
@@ -40,18 +38,14 @@ describe("ERC721", () => {
     const ownerOfToken0 = await erc721.ownerOf(0);
     const ownerOfToken1 = await erc721.ownerOf(1);
 
-    expect(ownerOfToken0).to.eq(owner.address, "NFT owner should be 'owner'.");
-    expect(ownerOfToken1).to.eq(
-      otherAccount.address,
-      "NFT owner should be 'otherAccount'."
-    );
+    expect(ownerOfToken0).to.eq(owner.address, "Incorrect owner.");
+    expect(ownerOfToken1).to.eq(otherAccount.address, "Incorrect owner.");
   });
 
   it("Should include correct metadata", async () => {
     const { erc721 } = await loadFixture(deployFixture);
     await erc721.deployed();
-
-    erc721.mint(1);
+    await erc721.mint(1);
     const tokenUri = await erc721.tokenURI(0);
 
     // Decode metadata and check if it's as expected
@@ -82,15 +76,114 @@ describe("ERC721", () => {
     );
   });
 
-  // it("Enable transfer", async () => {
-  //   const { erc721, owner, otherAccount } = await loadFixture(deployFixture);
-  //   await erc721.deployed();
+  it("Enable transfers only by owner or if approved", async () => {
+    const { erc721, owner, otherAccount } = await loadFixture(deployFixture);
+    await erc721.deployed();
+    await erc721.mint(1);
 
-  //   await erc721.mint(1);
-  //   await erc721.connect(otherAccount).mint(1);
-  // });
+    // Originally, owner is who minted the token
+    let ownerOf = await erc721.ownerOf(0);
+    expect(ownerOf).to.eq(owner.address);
 
-  // TODO: enable transfer
-  // TODO: approve & enable transfer
-  // TODO: do not allow transfer & approve from non-owner
+    // Transfer from non-owner should not be allowed
+    await expect(
+      erc721
+        .connect(otherAccount)
+        .transferFrom(owner.address, otherAccount.address, 0)
+    ).to.be.revertedWith("ERC721: caller is not token owner nor approved");
+
+    // Transfer to new owner
+    await erc721.transferFrom(owner.address, otherAccount.address, 0);
+
+    // Owner changed to new one after transfer
+    ownerOf = await erc721.ownerOf(0);
+    expect(ownerOf).to.eq(otherAccount.address);
+  });
+
+  it("Enable approvals only by owner or if approved", async () => {
+    const { erc721, otherAccount } = await loadFixture(deployFixture);
+    await erc721.deployed();
+    await erc721.mint(2);
+
+    await expect(
+      erc721.connect(otherAccount).approve(otherAccount.address, 0)
+    ).to.be.revertedWith(
+      "ERC721: approve caller is not token owner nor approved for all"
+    );
+
+    await expect(
+      erc721.connect(otherAccount).setApprovalForAll(otherAccount.address, true)
+    ).to.be.revertedWith("ERC721: approve to caller");
+  });
+
+  it("Approve specific token for transfer by another account", async () => {
+    const { erc721, owner, otherAccount } = await loadFixture(deployFixture);
+    await erc721.deployed();
+    await erc721.mint(2);
+
+    // Transfer from non-owner should not be allowed
+    await expect(
+      erc721
+        .connect(otherAccount)
+        .transferFrom(otherAccount.address, otherAccount.address, 0)
+    ).to.be.revertedWith("ERC721: caller is not token owner nor approved");
+
+    // Approve Token ID: 0 for transfers by otherAccount
+    await erc721.approve(otherAccount.address, 0);
+
+    // Check that approval set only for Token ID: 0
+    const approvedAddressToken0 = await erc721.getApproved(0);
+    const approvedAddressToken1 = await erc721.getApproved(1);
+    expect(approvedAddressToken0).to.eq(
+      otherAccount.address,
+      "Token ID: 0 should be approved for otherAccount."
+    );
+    expect(approvedAddressToken1).to.eq(
+      "0x0000000000000000000000000000000000000000",
+      "Token ID: 1 should not be approved for otherAccount."
+    );
+
+    // Transfer from non-owner should be allowed after approve for Token ID: 0
+    await expect(
+      erc721
+        .connect(otherAccount)
+        .transferFrom(owner.address, otherAccount.address, 0)
+    ).to.not.be.reverted;
+
+    // Transfer from non-owner should not be allowed for tokens other than Token ID: 0
+    await expect(
+      erc721
+        .connect(otherAccount)
+        .transferFrom(otherAccount.address, otherAccount.address, 1)
+    ).to.be.revertedWith("ERC721: caller is not token owner nor approved");
+  });
+
+  it("Approve all tokens for transfer by another account", async () => {
+    const { erc721, owner, otherAccount } = await loadFixture(deployFixture);
+    await erc721.deployed();
+    await erc721.mint(2);
+
+    // Transfer from non-owner should not be allowed
+    await expect(
+      erc721
+        .connect(otherAccount)
+        .transferFrom(otherAccount.address, otherAccount.address, 0)
+    ).to.be.revertedWith("ERC721: caller is not token owner nor approved");
+
+    // Approve Token ID: 0 for transfers by otherAccount
+    await erc721.setApprovalForAll(otherAccount.address, true);
+
+    // Transfer from non-owner should be allowed after setApprovalForAll for all tokens
+    await expect(
+      erc721
+        .connect(otherAccount)
+        .transferFrom(owner.address, otherAccount.address, 0)
+    ).to.not.be.reverted;
+
+    await expect(
+      erc721
+        .connect(otherAccount)
+        .transferFrom(owner.address, otherAccount.address, 1)
+    ).to.not.be.reverted;
+  });
 });
