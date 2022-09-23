@@ -1,12 +1,22 @@
+import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
 import isSvg from "is-svg";
 
 describe("ERC721", () => {
-  it("Should deploy and have correct name + symbol", async () => {
-    // Deployed successfully
+  const deployFixture = async () => {
+    // Contracts are deployed using the first signer/account by default
+    const [owner, otherAccount] = await ethers.getSigners();
+
     const ERC721 = await ethers.getContractFactory("PlaceholderNFTERC721");
     const erc721 = await ERC721.deploy();
+
+    return { erc721, owner, otherAccount };
+  };
+
+  it("Should deploy and have correct name + symbol", async () => {
+    // Deployed successfully
+    const { erc721 } = await loadFixture(deployFixture);
     await erc721.deployed();
     expect(erc721.address).to.have.lengthOf(42);
 
@@ -19,10 +29,7 @@ describe("ERC721", () => {
   });
 
   it("Should allow minting", async () => {
-    const [owner] = await ethers.getSigners();
-
-    const ERC721 = await ethers.getContractFactory("PlaceholderNFTERC721");
-    const erc721 = await ERC721.deploy();
+    const { erc721, owner } = await loadFixture(deployFixture);
     await erc721.deployed();
 
     const MINT_AMOUNT = 10;
@@ -38,8 +45,7 @@ describe("ERC721", () => {
   });
 
   it("Should include correct metadata", async () => {
-    const ERC721 = await ethers.getContractFactory("PlaceholderNFTERC721");
-    const erc721 = await ERC721.deploy();
+    const { erc721 } = await loadFixture(deployFixture);
     await erc721.deployed();
 
     erc721.mint(1);
@@ -65,8 +71,7 @@ describe("ERC721", () => {
   });
 
   it("Throw error if non-existant token ID is being queried", async () => {
-    const ERC721 = await ethers.getContractFactory("PlaceholderNFTERC721");
-    const erc721 = await ERC721.deploy();
+    const { erc721 } = await loadFixture(deployFixture);
     await erc721.deployed();
 
     // const tokenUri = await erc721.tokenURI(0);
