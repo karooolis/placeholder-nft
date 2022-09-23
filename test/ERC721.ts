@@ -74,12 +74,9 @@ describe("ERC721", () => {
     const { erc721 } = await loadFixture(deployFixture);
     await erc721.deployed();
 
-    // const tokenUri = await erc721.tokenURI(0);
-    // console.log(tokenUri);
-
-    // expect(erc721.tokenURI(0)).to.be.reverted("error");
-
-    // "ERC721: invalid token ID"
+    await expect(erc721.tokenURI(0)).to.be.revertedWith(
+      "ERC721: invalid token ID"
+    );
   });
 
   // TODO: enable transfer
