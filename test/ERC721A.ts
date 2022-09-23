@@ -6,11 +6,11 @@ import isSvg from "is-svg";
 describe("ERC721A", () => {
   const deployFixture = async () => {
     // Contracts are deployed using the first signer/account by default
-    const [owner, otherAccount] = await ethers.getSigners();
+    const [owner, otherAccount, otherAccount2] = await ethers.getSigners();
     const ERC721A = await ethers.getContractFactory("PlaceholderNFTERC721A");
     const erc721a = await ERC721A.deploy();
 
-    return { erc721a, owner, otherAccount };
+    return { erc721a, owner, otherAccount, otherAccount2 };
   };
 
   it("Should deploy and have correct name + symbol", async () => {
@@ -77,7 +77,7 @@ describe("ERC721A", () => {
   it("Enable transfers only by owner or if approved", async () => {
     const { erc721a, owner, otherAccount } = await loadFixture(deployFixture);
     await erc721a.deployed();
-    await erc721a.mint(1);
+    await erc721a.mint(2);
 
     // Originally, owner is who minted the token
     let ownerOf = await erc721a.ownerOf(0);
@@ -96,27 +96,49 @@ describe("ERC721A", () => {
     // Owner changed to new one after transfer
     ownerOf = await erc721a.ownerOf(0);
     expect(ownerOf).to.eq(otherAccount.address);
+
+    // Approve otherAccount to transfer
+    await erc721a.setApprovalForAll(otherAccount.address, true);
+    await expect(
+      erc721a
+        .connect(otherAccount)
+        .transferFrom(owner.address, otherAccount.address, 1)
+    ).to.not.be.reverted;
   });
 
   it("Enable approvals only by owner or if approved", async () => {
-    const { erc721a, owner, otherAccount } = await loadFixture(deployFixture);
+    const { erc721a, otherAccount, otherAccount2 } = await loadFixture(
+      deployFixture
+    );
     await erc721a.deployed();
     await erc721a.mint(2);
 
+    // Should not allow approvals from non-owner
     await expect(erc721a.connect(otherAccount).approve(otherAccount.address, 0))
       .to.be.reverted;
 
+    // NOTE: ERC721A does not throw if setApprovalForAll is called from non-owner or non-approved.
+    // Yet, it does not actually approve on behalf of unwarranted account and thus works as intended.
     await expect(
       erc721a
         .connect(otherAccount)
         .setApprovalForAll(otherAccount.address, true)
     ).to.not.be.reverted;
 
+    // Should allow approvals from owner
+    await expect(erc721a.approve(otherAccount.address, 0)).to.not.be.reverted;
+    await expect(erc721a.setApprovalForAll(otherAccount.address, true)).to.not
+      .be.reverted;
+
+    // Should allow approvals from "approved"
+    await expect(
+      erc721a.connect(otherAccount).approve(otherAccount2.address, 0)
+    ).to.not.be.reverted;
     await expect(
       erc721a
         .connect(otherAccount)
-        .transferFrom(owner.address, otherAccount.address, 0)
-    ).to.be.reverted;
+        .setApprovalForAll(otherAccount2.address, true)
+    ).to.not.be.reverted;
   });
 
   it("Approve specific token for transfer by another account", async () => {
@@ -161,7 +183,7 @@ describe("ERC721A", () => {
     ).to.be.reverted;
   });
 
-  it("Approve all tokens for transfer by another account", async () => {
+  it("Transfer after setApprovalForAll", async () => {
     const { erc721a, owner, otherAccount } = await loadFixture(deployFixture);
     await erc721a.deployed();
     await erc721a.mint(2);
