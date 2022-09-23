@@ -71,9 +71,7 @@ describe("ERC721", () => {
     const { erc721 } = await loadFixture(deployFixture);
     await erc721.deployed();
 
-    await expect(erc721.tokenURI(0)).to.be.revertedWith(
-      "ERC721: invalid token ID"
-    );
+    await expect(erc721.tokenURI(0)).to.be.reverted;
   });
 
   it("Enable transfers only by owner or if approved", async () => {
@@ -90,7 +88,7 @@ describe("ERC721", () => {
       erc721
         .connect(otherAccount)
         .transferFrom(owner.address, otherAccount.address, 0)
-    ).to.be.revertedWith("ERC721: caller is not token owner nor approved");
+    ).to.be.reverted;
 
     // Transfer to new owner
     await erc721.transferFrom(owner.address, otherAccount.address, 0);
@@ -105,15 +103,12 @@ describe("ERC721", () => {
     await erc721.deployed();
     await erc721.mint(2);
 
-    await expect(
-      erc721.connect(otherAccount).approve(otherAccount.address, 0)
-    ).to.be.revertedWith(
-      "ERC721: approve caller is not token owner nor approved for all"
-    );
+    await expect(erc721.connect(otherAccount).approve(otherAccount.address, 0))
+      .to.be.reverted;
 
     await expect(
       erc721.connect(otherAccount).setApprovalForAll(otherAccount.address, true)
-    ).to.be.revertedWith("ERC721: approve to caller");
+    ).to.be.reverted;
   });
 
   it("Approve specific token for transfer by another account", async () => {
@@ -126,7 +121,7 @@ describe("ERC721", () => {
       erc721
         .connect(otherAccount)
         .transferFrom(otherAccount.address, otherAccount.address, 0)
-    ).to.be.revertedWith("ERC721: caller is not token owner nor approved");
+    ).to.be.reverted;
 
     // Approve Token ID: 0 for transfers by otherAccount
     await erc721.approve(otherAccount.address, 0);
@@ -155,7 +150,7 @@ describe("ERC721", () => {
       erc721
         .connect(otherAccount)
         .transferFrom(otherAccount.address, otherAccount.address, 1)
-    ).to.be.revertedWith("ERC721: caller is not token owner nor approved");
+    ).to.be.reverted;
   });
 
   it("Approve all tokens for transfer by another account", async () => {
@@ -168,7 +163,7 @@ describe("ERC721", () => {
       erc721
         .connect(otherAccount)
         .transferFrom(otherAccount.address, otherAccount.address, 0)
-    ).to.be.revertedWith("ERC721: caller is not token owner nor approved");
+    ).to.be.reverted;
 
     // Approve Token ID: 0 for transfers by otherAccount
     await erc721.setApprovalForAll(otherAccount.address, true);
