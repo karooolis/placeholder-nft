@@ -28,20 +28,23 @@ describe("ERC721", () => {
     expect(symbol).to.eq("PNFT-ERC721", "Symbol not set correctly.");
   });
 
-  it("Should allow minting", async () => {
-    const { erc721, owner } = await loadFixture(deployFixture);
+  it("Should allow minting & set correct owner", async () => {
+    const { erc721, owner, otherAccount } = await loadFixture(deployFixture);
     await erc721.deployed();
 
-    const MINT_AMOUNT = 10;
-
     // Mint tokens
-    await erc721.mint(MINT_AMOUNT);
+    await erc721.mint(1);
+    await erc721.connect(otherAccount).mint(1);
 
-    // Owner set correctly
-    for (let i = 0; i < MINT_AMOUNT; i++) {
-      const ownerOf = await erc721.ownerOf(i);
-      expect(ownerOf).to.eq(owner.address, "NFT owner not as expected.");
-    }
+    // Owners set correctly
+    const ownerOfToken0 = await erc721.ownerOf(0);
+    const ownerOfToken1 = await erc721.ownerOf(1);
+
+    expect(ownerOfToken0).to.eq(owner.address, "NFT owner should be 'owner'.");
+    expect(ownerOfToken1).to.eq(
+      otherAccount.address,
+      "NFT owner should be 'otherAccount'."
+    );
   });
 
   it("Should include correct metadata", async () => {
@@ -78,6 +81,14 @@ describe("ERC721", () => {
       "ERC721: invalid token ID"
     );
   });
+
+  // it("Enable transfer", async () => {
+  //   const { erc721, owner, otherAccount } = await loadFixture(deployFixture);
+  //   await erc721.deployed();
+
+  //   await erc721.mint(1);
+  //   await erc721.connect(otherAccount).mint(1);
+  // });
 
   // TODO: enable transfer
   // TODO: approve & enable transfer
