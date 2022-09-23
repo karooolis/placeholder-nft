@@ -29,6 +29,7 @@
     "ethers": "^5.0.0",
     "hardhat": "^2.9.3",
     "hardhat-gas-reporter": "^1.0.4",
+    "is-svg": "^4.3.2",
     "prettier": "^2.3.2",
     "prettier-plugin-solidity": "^1.0.0-beta.13",
     "solhint": "^3.3.6",

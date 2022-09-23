@@ -1,5 +1,6 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
+import isSvg from "is-svg";
 
 describe("ERC721", () => {
   it("Should deploy and have correct name + symbol", async () => {
@@ -36,7 +37,7 @@ describe("ERC721", () => {
     }
   });
 
-  it("Should show correct tokenUri", async () => {
+  it("Should include correct metadata", async () => {
     const ERC721 = await ethers.getContractFactory("PlaceholderNFTERC721");
     const erc721 = await ERC721.deploy();
     await erc721.deployed();
@@ -44,8 +45,23 @@ describe("ERC721", () => {
     erc721.mint(1);
     const tokenUri = await erc721.tokenURI(0);
 
-    // TODO: decode URI and check
-    console.log(tokenUri);
+    // Decode metadata and check if it's as expected
+    const [, metadata] = tokenUri.split("base64,");
+    const { name, image, description } = JSON.parse(atob(metadata));
+    const [, base64Image] = image.split("base64,");
+    const svgImage = atob(base64Image);
+
+    expect(name).to.eq(
+      "Placeholder NFT (ERC721) #0",
+      "Incorrect metadata name set."
+    );
+
+    expect(description).to.eq(
+      "Placeholder NFT is an unlimited supply, fully on-chain, NFT collection available on any EVM-compatible chain. You may mint it freely, and use it for testing, or your own satisfaction.",
+      "Incorrect metadata description set."
+    );
+
+    expect(isSvg(svgImage)).to.be.true("Image is not SVG type.");
   });
 
   it("Throw error if non-existant token ID is being queried", async () => {
@@ -60,4 +76,8 @@ describe("ERC721", () => {
 
     // "ERC721: invalid token ID"
   });
+
+  // TODO: enable transfer
+  // TODO: approve & enable transfer
+  // TODO: do not allow transfer & approve from non-owner
 });

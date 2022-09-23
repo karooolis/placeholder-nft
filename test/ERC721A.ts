@@ -1,0 +1,1 @@
+// TODO: add same tests as for ERC721
