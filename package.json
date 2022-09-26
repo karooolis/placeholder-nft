@@ -12,6 +12,9 @@
     "start": "yarn --cwd frontend start",
     "build": "yarn --cwd frontend build",
     "dev": "yarn --cwd frontend dev",
-    "lint": "yarn --cwd frontend lint"
+    "lint": "yarn --cwd frontend lint",
+    "test:contracts": "yarn --cwd contracts test",
+    "deploy:contracts": "yarn --cwd contracts deploy",
+    "verify:contracts": "yarn --cwd contracts verify"
   }
 }

@@ -1,11 +1,9 @@
 # Placeholder NFT contracts
 
-Placeholder NFT contracts consist of ERC721, ERC721A and ERC1155 on-chain NFT implementations.
+## Getting started
 
-## Installation
-
-1. `yarn install`
-2. Copy `.env.example` to `.env` and setup environment variables.
+1. Make sure the dependencies are installed. If not, run `yarn install`.
+2. Copy `.env.example` to `.env` and setup environment variables with your own RPC endpoints.
 
 ## Test run contracts
 
