@@ -9,7 +9,7 @@
     "contracts"
   ],
   "scripts": {
-    "start": "yarn --cwd frontned start",
+    "start": "yarn --cwd frontend start",
     "build": "yarn --cwd frontend build",
     "dev": "yarn --cwd frontend dev",
     "lint": "yarn --cwd frontend lint"
