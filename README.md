@@ -2,7 +2,7 @@
 
 Placeholder NFT is an unlimited supply, fully on-chain, NFT collection available on any EVM-compatible chain. It was created for the purpose of enabling regular users, and developers to create & test different NFT formats freely, plus experiment with them.
 
-It consists of ERC721, ERC721A and ERC1155 on-chain NFT implementations. See more in [Placeholder NFT contracts](contracts/README.md).
+Placeholder NFT monorepo consists of two parts, [Solidity smart contracts](contracts) and [frontend wrapper](frontend).
 
 ## Getting started
 
@@ -16,7 +16,7 @@ It consists of ERC721, ERC721A and ERC1155 on-chain NFT implementations. See mor
 
 ### May I inspect already deployed contracts?
 
-[See already deployed contracts here](contracts/README.md#deployed-contracts).
+[See the deployed contracts here](contracts/README.md#deployed-contracts).
 
 ### What is an on-chain NFT??
 

@@ -1,5 +1,7 @@
 # Placeholder NFT contracts
 
+The NFT contracts are made up of ERC721, ERC721A and ERC1155 on-chain NFT implementations.
+
 ## Getting started
 
 1. Make sure the dependencies are installed. If not, run `yarn install`.
