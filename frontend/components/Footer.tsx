@@ -6,10 +6,10 @@ const Footer = () => {
     <footer className="py-6 text-center">
       <div className="inline-block">
         <GitHubButton
-          href="https://github.com/karooolis/placeholder-nft-contracts"
+          href="https://github.com/karooolis/placeholder-nft"
           data-color-scheme="no-preference: dark_high_contrast; light: dark_high_contrast; dark: dark_high_contrast;"
           data-size="large"
-          aria-label="Star karooolis/placeholder-nft-contracts on GitHub"
+          aria-label="Star karooolis/placeholder-nft on GitHub"
         >
           Star on GitHub
         </GitHubButton>
