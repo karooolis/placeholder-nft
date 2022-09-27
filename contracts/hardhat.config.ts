@@ -4,7 +4,7 @@ import { HardhatUserConfig } from "hardhat/config";
 import "@nomiclabs/hardhat-ethers";
 import "@nomicfoundation/hardhat-toolbox";
 import "@nomicfoundation/hardhat-chai-matchers";
-import "xdeployer"
+import "xdeployer";
 
 dotenv.config();
 
@@ -17,7 +17,7 @@ const config: HardhatUserConfig = {
   solidity: "0.8.9",
   networks: {
     // Ethereum
-    ethMain: {
+    mainnet: {
       url: process.env.ETHEREUM_URL || "",
       chainId: 1,
       accounts: accounts,
@@ -38,13 +38,6 @@ const config: HardhatUserConfig = {
       gas: 2100000,
       gasPrice: 8000000000,
     },
-    kovan: {
-      url: process.env.ETHEREUM_KOVAN_URL || "",
-      chainId: 42,
-      accounts: accounts,
-      gas: 2100000,
-      gasPrice: 8000000000,
-    },
     goerli: {
       url: process.env.ETHEREUM_GOERLI_URL || "",
       chainId: 5,
@@ -61,7 +54,7 @@ const config: HardhatUserConfig = {
       gas: 2100000,
       gasPrice: 80000000000,
     },
-    mumbai: {
+    polygonMumbai: {
       url: process.env.POLYGON_MUMBAI_URL || "",
       chainId: 80001,
       accounts: accounts,
@@ -70,7 +63,7 @@ const config: HardhatUserConfig = {
     },
 
     // Binance
-    bscMain: {
+    bsc: {
       url: process.env.BINANCE_URL || "",
       chainId: 56,
       accounts: accounts,
@@ -93,7 +86,7 @@ const config: HardhatUserConfig = {
       gas: 2100000,
       gasPrice: 8000000000,
     },
-    optimismTestnet: {
+    optimisticKovan: {
       url: process.env.OPTIMISM_KOVAN_URL || "",
       chainId: 69,
       accounts: accounts,
@@ -134,7 +127,7 @@ const config: HardhatUserConfig = {
       // "optimismMain",
       "optimismTestnet",
       // "arbitrumMain",
-      "arbitrumTestnet"
+      "arbitrumTestnet",
     ],
     rpcUrls: [
       // process.env.ETHEREUM_URL,
@@ -149,9 +142,8 @@ const config: HardhatUserConfig = {
       // process.env.OPTIMISM_URL,
       process.env.OPTIMISM_KOVAN_URL,
       // process.env.ARBITRUM_URL,
-      process.env.ARBITRUM_RINKEBY_URL
+      process.env.ARBITRUM_RINKEBY_URL,
     ],
-    gasPrice: 80000000000,
     gasLimit: 1.2 * 10 ** 7,
   },
   gasReporter: {
@@ -159,7 +151,20 @@ const config: HardhatUserConfig = {
     currency: "USD",
   },
   etherscan: {
-    apiKey: process.env.POLYGON_ETHERSCAN_API_KEY,
+    apiKey: {
+      // mainnet: process.env.ETHEREUM_ETHERSCAN_API_KEY as string,
+      rinkeby: process.env.ETHEREUM_ETHERSCAN_API_KEY as string,
+      ropsten: process.env.ETHEREUM_ETHERSCAN_API_KEY as string,
+      goerli: process.env.ETHEREUM_ETHERSCAN_API_KEY as string,
+      // polygon: process.env.POLYGON_ETHERSCAN_API_KEY as string,
+      polygonMumbai: process.env.POLYGON_ETHERSCAN_API_KEY as string,
+      bsc: process.env.BINANCE_ETHERSCAN_API_KEY as string,
+      bscTestnet: process.env.BINANCE_ETHERSCAN_API_KEY as string,
+      // optimismMain: process.env.OPTIMISM_ETHERSCAN_API_KEY as string,
+      optimisticKovan: process.env.OPTIMISM_ETHERSCAN_API_KEY as string,
+      // arbitrumOne: process.env.ARBITRUM_ETHERSCAN_API_KEY as string,
+      arbitrumTestnet: process.env.ARBITRUM_ETHERSCAN_API_KEY as string,
+    },
   },
 };
 
