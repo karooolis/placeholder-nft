@@ -12,22 +12,28 @@ Placeholder NFT monorepo consists of two parts, [Solidity smart contracts](contr
   3.1 In order to work on smart contracts, continue with instructions in [Placeholder NFT contracts](contracts/README.md).  
   3.2 In order to work on the frontend, continue with instructions in [Placeholder NFT frontend](frontend/README.md).
 
-## Frequently Asked Questions
+## Deployed contracts
 
-### May I inspect already deployed contracts?
-
-[See the deployed contracts here](contracts/README.md#deployed-contracts).
-
-### What is an on-chain NFT??
-
-On-chain NFT stores all its metadata + image directly on the blockchain. In this case, each token image is represented as SVG stored in the smart contract. And same goes for the metadata that gets encoded as base64.
-
-On-chain NFTs are superior to off-chain ones as they live solely on the blockchain. As long as the blockchain lives, the NFT lives. Off-chain NFTs do not have the same guarantess since they rely on external storage providers, such as IPFS, to be available.
-
-### ERC721 vs ERC721A vs ERC1155?
-
-ERC721 is a token standard for non-fungible tokens on Ethereum. A pillar of the ecosystem, it supports billions of dollars worth of NFTs.
-
-ERC721A is an improved implementation of the IERC-721 standard that supports minting multiple tokens for close to the cost of one. While not as battle-tested as standard ERC721, it introduces significant gas savings.
-
-ERC1155 is a token standard that enables the efficient transfer of fungible and non-fungible tokens in a single transaction. Often used for gaming tokens.
+| Network     | NFT type    | Address     |
+| ----------- | ----------- | ----------- |
+| Rinkeby     | ERC721      | [0x7Df920991Fb8cBE4A16d8Ad64F13B090b7b9a1F8](https://rinkeby.etherscan.io/address/0x7Df920991Fb8cBE4A16d8Ad64F13B090b7b9a1F8#code) |
+| Goerli     | ERC721      | [0x7Df920991Fb8cBE4A16d8Ad64F13B090b7b9a1F8](https://goerli.etherscan.io/address/0x7Df920991Fb8cBE4A16d8Ad64F13B090b7b9a1F8#code) |
+| Mumbai     | ERC721      | [0x7Df920991Fb8cBE4A16d8Ad64F13B090b7b9a1F8](https://mumbai.polygonscan.com/address/0x7Df920991Fb8cBE4A16d8Ad64F13B090b7b9a1F8#code) |
+| BSC     | ERC721      | [0x7Df920991Fb8cBE4A16d8Ad64F13B090b7b9a1F8](https://bscscan.com/address/0x7Df920991Fb8cBE4A16d8Ad64F13B090b7b9a1F8#code) |
+| BSC Testnet     | ERC721      | [0x7Df920991Fb8cBE4A16d8Ad64F13B090b7b9a1F8](https://testnet.bscscan.com/address/0x7Df920991Fb8cBE4A16d8Ad64F13B090b7b9a1F8#code) |
+| Kovan Optimistic     | ERC721      | [0x7Df920991Fb8cBE4A16d8Ad64F13B090b7b9a1F8](https://kovan-optimistic.etherscan.io/address/0x7Df920991Fb8cBE4A16d8Ad64F13B090b7b9a1F8#code) |
+| Arbitrum Testnet     | ERC721      | [0x7Df920991Fb8cBE4A16d8Ad64F13B090b7b9a1F8](https://testnet.arbiscan.io/address/0x7Df920991Fb8cBE4A16d8Ad64F13B090b7b9a1F8#code) |
+| Rinkeby     | ERC721A     | [0xc816EB81c65efA37EeAFB673c39BDb5A57226896](https://rinkeby.etherscan.io/address/0xc816EB81c65efA37EeAFB673c39BDb5A57226896#code) |
+| Goerli     | ERC721A     | [0xc816EB81c65efA37EeAFB673c39BDb5A57226896](https://goerli.etherscan.io/address/0xc816EB81c65efA37EeAFB673c39BDb5A57226896#code) |
+| Mumbai     | ERC721A      | [0xc816EB81c65efA37EeAFB673c39BDb5A57226896](https://mumbai.polygonscan.com/address/0xc816EB81c65efA37EeAFB673c39BDb5A57226896#code) |
+| BSC     | ERC721A      | [0xc816EB81c65efA37EeAFB673c39BDb5A57226896](https://bscscan.com/address/0xc816EB81c65efA37EeAFB673c39BDb5A57226896#code) |
+| BSC Testnet     | ERC721A      | [0xc816EB81c65efA37EeAFB673c39BDb5A57226896](https://testnet.bscscan.com/address/0xc816EB81c65efA37EeAFB673c39BDb5A57226896#code) |
+| Kovan Optimistic     | ERC721A      | [0xc816EB81c65efA37EeAFB673c39BDb5A57226896](https://kovan-optimistic.etherscan.io/address/0xc816EB81c65efA37EeAFB673c39BDb5A57226896#code) |
+| Arbitrum Testnet     | ERC721A      | [0xc816EB81c65efA37EeAFB673c39BDb5A57226896](https://testnet.arbiscan.io/address/0xc816EB81c65efA37EeAFB673c39BDb5A57226896#code) |
+| Rinkeby     | ERC1155     | [0x5a28F24109b7E122EeE1968fD51Db983da46cb31](https://rinkeby.etherscan.io/address/0x5a28F24109b7E122EeE1968fD51Db983da46cb31#code) |
+| Goerli     | ERC1155     | [0x5a28F24109b7E122EeE1968fD51Db983da46cb31](https://goerli.etherscan.io/address/0x5a28F24109b7E122EeE1968fD51Db983da46cb31#code) |
+| Mumbai     | ERC1155      | [0x5a28F24109b7E122EeE1968fD51Db983da46cb31](https://mumbai.polygonscan.com/address/0x5a28F24109b7E122EeE1968fD51Db983da46cb31#code) |
+| BSC     | ERC1155      | [0x5a28F24109b7E122EeE1968fD51Db983da46cb31](https://bscscan.com/address/0x5a28F24109b7E122EeE1968fD51Db983da46cb31#code) |
+| BSC Testnet     | ERC1155      | [0x5a28F24109b7E122EeE1968fD51Db983da46cb31](https://testnet.bscscan.com/address/0x5a28F24109b7E122EeE1968fD51Db983da46cb31#code) |
+| Kovan Optimistic     | ERC1155      | [0x5a28F24109b7E122EeE1968fD51Db983da46cb31](https://kovan-optimistic.etherscan.io/address/0x5a28F24109b7E122EeE1968fD51Db983da46cb31#code) |
+| Arbitrum Testnet     | ERC1155      | [0x5a28F24109b7E122EeE1968fD51Db983da46cb31](https://testnet.arbiscan.io/address/0x5a28F24109b7E122EeE1968fD51Db983da46cb31#code) |

@@ -37,28 +37,21 @@ const VerifiedContracts = ({ chain, explorer }: VerifiedContractsProps) => {
 
 export const FAQ_DATA = [
   {
-    question: "May I inspect the contracts?",
+    question: "May I inspect and verify the contracts?",
     answer: (
       <>
         <p>
-          Contracts deployed across all networks are exactly the same. Go visit
-          below to inspect the verified contracts:
+          Find the list of deployed and verified contracts on{" "}
+          <a
+            className="text-blue-500 text-underline"
+            href="https://github.com/karooolis/placeholder-nft/tree/main/#deployed-contracts"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub 	&ldquo;Deployed contracts&rdquo;
+          </a>{" "}
+          section.
         </p>
-
-        <VerifiedContracts
-          chain={Chain.Ethereum}
-          explorer="https://etherscan.io/address"
-        />
-
-        <VerifiedContracts
-          chain={Chain.BSC}
-          explorer="https://bscscan.com/address"
-        />
-
-        <VerifiedContracts
-          chain={Chain.Polygon}
-          explorer="https://polygonscan.com/address"
-        />
       </>
     ),
   },
