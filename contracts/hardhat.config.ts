@@ -4,6 +4,7 @@ import { HardhatUserConfig } from "hardhat/config";
 import "@nomiclabs/hardhat-ethers";
 import "@nomicfoundation/hardhat-toolbox";
 import "@nomicfoundation/hardhat-chai-matchers";
+import "xdeployer"
 
 dotenv.config();
 
@@ -16,7 +17,7 @@ const config: HardhatUserConfig = {
   solidity: "0.8.9",
   networks: {
     // Ethereum
-    ethereum: {
+    ethMain: {
       url: process.env.ETHEREUM_URL || "",
       chainId: 1,
       accounts: accounts,
@@ -69,14 +70,14 @@ const config: HardhatUserConfig = {
     },
 
     // Binance
-    bsc: {
+    bscMain: {
       url: process.env.BINANCE_URL || "",
       chainId: 56,
       accounts: accounts,
       gas: 2100000,
       gasPrice: 8000000000,
     },
-    bsc_testnet: {
+    bscTestnet: {
       url: process.env.BINANCE_TESTNET_URL || "",
       chainId: 97,
       accounts: accounts,
@@ -85,14 +86,14 @@ const config: HardhatUserConfig = {
     },
 
     // Optimism
-    optimism: {
+    optimismMain: {
       url: process.env.OPTIMISM_URL || "",
       chainId: 10,
       accounts: accounts,
       gas: 2100000,
       gasPrice: 8000000000,
     },
-    optimism_kovan: {
+    optimismTestnet: {
       url: process.env.OPTIMISM_KOVAN_URL || "",
       chainId: 69,
       accounts: accounts,
@@ -101,20 +102,57 @@ const config: HardhatUserConfig = {
     },
 
     // Arbitrum
-    arbitrum: {
+    arbitrumMain: {
       url: process.env.ARBITRUM_URL || "",
       chainId: 42161,
       accounts: accounts,
       gas: 2100000,
       gasPrice: 8000000000,
     },
-    arbitrum_rinkeby: {
+    arbitrumTestnet: {
       url: process.env.ARBITRUM_RINKEBY_URL || "",
       chainId: 421611,
       accounts: accounts,
       gas: 6721975,
       gasPrice: 8000000000,
     },
+  },
+  xdeploy: {
+    contract: "PlaceholderNFTERC1155",
+    salt: process.env.DEPLOYMENT_SALT,
+    signer: process.env.PRIVATE_KEY,
+    networks: [
+      // "ethMain",
+      "rinkeby",
+      "ropsten",
+      "kovan",
+      "goerli",
+      "polygon",
+      "mumbai",
+      "bscMain",
+      "bscTestnet",
+      // "optimismMain",
+      "optimismTestnet",
+      // "arbitrumMain",
+      "arbitrumTestnet"
+    ],
+    rpcUrls: [
+      // process.env.ETHEREUM_URL,
+      process.env.ETHEREUM_RINKEBY_URL,
+      process.env.ETHEREUM_ROPSTEN_URL,
+      process.env.ETHEREUM_KOVAN_URL,
+      process.env.ETHEREUM_GOERLI_URL,
+      process.env.POLYGON_URL,
+      process.env.POLYGON_MUMBAI_URL,
+      process.env.BINANCE_URL,
+      process.env.BINANCE_TESTNET_URL,
+      // process.env.OPTIMISM_URL,
+      process.env.OPTIMISM_KOVAN_URL,
+      // process.env.ARBITRUM_URL,
+      process.env.ARBITRUM_RINKEBY_URL
+    ],
+    gasPrice: 80000000000,
+    gasLimit: 1.2 * 10 ** 7,
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,

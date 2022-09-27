@@ -75,11 +75,8 @@ const Minter = ({ count, contractType }: Props) => {
   const [tx, setTx] = useState();
   const [isMinting, setIsMinting] = useState(false);
 
-  const network = useNetwork();
-  const chainId = network.chain?.id as Chain;
-
   const contract = useContract({
-    addressOrName: CONTRACT_ADDRESS[chainId][contractType],
+    addressOrName: CONTRACT_ADDRESS[contractType],
     contractInterface: CONTRACT_ABI[contractType],
     signerOrProvider: signer,
   });

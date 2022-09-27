@@ -7910,6 +7910,11 @@ ws@^8.5.0:
   resolved "https://registry.yarnpkg.com/ws/-/ws-8.9.0.tgz#2a994bb67144be1b53fe2d23c53c028adeb7f45e"
   integrity sha512-Ja7nszREasGaYUYCI2k4lCKIRTt+y7XuqVoHR44YpI49TtryyqbqvDMn5eqfW7e6HzTukDRIsXqzVHScqRcafg==
 
+xdeployer@^1.1.20:
+  version "1.1.20"
+  resolved "https://registry.yarnpkg.com/xdeployer/-/xdeployer-1.1.20.tgz#4cac0d534852b2f46b585aa10caee2f86583df5a"
+  integrity sha512-R7dMu4FgDvQFSOZQtU6aE07ZylDO1j8KpfhEjhPTaD1LRrI8AGxVxEmcpyqT4OUlIDZe6X5a0qINAv/MrB5xAg==
+
 xmlhttprequest@1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/xmlhttprequest/-/xmlhttprequest-1.8.0.tgz#67fe075c5c24fef39f9d65f5f7b7fe75171968fc"

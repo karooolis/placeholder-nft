@@ -10,34 +10,6 @@ import splitbee from '@splitbee/web';
 // Initialize Splitbee analytics
 splitbee.init()
 
-// const avax: Chain = {
-//   id: 56,
-//   name: "Binance Smart Chain",
-//   network: "Binance Smart Chain",
-//   nativeCurrency: {
-//     name: "BNB",
-//     symbol: "BNB",
-//     decimals: 18,
-//   },
-//   iconUrl: 'https://res.cloudinary.com/drchu0ouk/image/upload/c_scale,w_28/v1658032551/placeholder_nft/bsc_gwze06.svg',
-//   rpcUrls: {
-//     default: "https://bsc-dataseed.binance.org",
-//     default2: "https://bsc-dataseed1.defibit.io/",
-//     default3: "https://bsc-dataseed1.ninicoin.io/",
-//   },
-//   blockExplorers: {
-//     etherscan: {
-//       name: "Avalanche C-Chain Explorer",
-//       url: "https://snowtrace.io/",
-//     },
-//     default: {
-//       name: "Avalanche C-Chain Explorer",
-//       url: "https://snowtrace.io/",
-//     },
-//   },
-//   testnet: false,
-// };
-
 const binance: Chain = {
   id: 56,
   name: "Binance Smart Chain",
@@ -93,13 +65,13 @@ const binanceTestnet: Chain = {
 
 const { chains, provider, webSocketProvider } = configureChains(
   [
-    chain.mainnet,
+    // chain.mainnet,
     chain.goerli,
     chain.kovan,
     chain.rinkeby,
     chain.ropsten,
 
-    chain.polygon,
+    // chain.polygon,
     chain.polygonMumbai,
 
     // chain.optimism,
@@ -110,17 +82,6 @@ const { chains, provider, webSocketProvider } = configureChains(
 
     binance,
     binanceTestnet,
-
-    // Avalanche
-
-
-    // Fantom
-    // Cardano
-    // Tron
-
-    // ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === "true"
-    //   ? [chain.goerli, chain.kovan, chain.rinkeby, chain.ropsten]
-    //   : []),
   ],
   [
     alchemyProvider({

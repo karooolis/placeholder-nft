@@ -17,14 +17,14 @@ const VerifiedContracts = ({ chain, explorer }: VerifiedContractsProps) => {
           return (
             <li key={`${chain}-${contractType}`} className="truncate">
               <a
-                href={`${explorer}/${CONTRACT_ADDRESS[chain][contractType]}#code`}
+                href={`${explorer}/${CONTRACT_ADDRESS[contractType]}#code`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-500 hover:underline"
               >
                 {contractType}{" "}
                 <span className="bg-gray-100 text-gray-700 font-semilight">
-                  {CONTRACT_ADDRESS[chain][contractType]}
+                  {CONTRACT_ADDRESS[contractType]}
                 </span>
               </a>
             </li>

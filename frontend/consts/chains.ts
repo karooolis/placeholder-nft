@@ -1,10 +1,10 @@
 export enum Chain {
-  Ethereum = 1,
+  // TODO: Ethereum = 1,
   Ropsten = 3,
   Rinkeby = 4,
   Goerli = 5,
   Kovan = 42,
-  Polygon = 137,
+  // TODO: Polygon = 137,
   Mumbai = 80001,
   BSC = 56,
   BSC_Testnet = 97,
@@ -15,12 +15,12 @@ export enum Chain {
 }
 
 export const CHAIN_NAME: { [key in Chain]: string } = {
-  [Chain.Ethereum]: 'Ethereum',
+  // [Chain.Ethereum]: 'Ethereum',
   [Chain.Ropsten]: 'Ropsten',
   [Chain.Rinkeby]: 'Rinkeby',
   [Chain.Goerli]: 'Goerli',
   [Chain.Kovan]: 'Kovan',
-  [Chain.Polygon]: 'Polygon',
+  // [Chain.Polygon]: 'Polygon',
   [Chain.Mumbai]: 'Polygon Mumbai',
   [Chain.BSC]: 'Binance Smart Chain',
   [Chain.BSC_Testnet]: 'Binance Smart Chain - Testnet',
