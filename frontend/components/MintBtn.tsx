@@ -75,17 +75,22 @@ const Minter = ({ count, contractType }: Props) => {
   const [tx, setTx] = useState();
   const [isMinting, setIsMinting] = useState(false);
 
+  const network = useNetwork();
+  const chainId = network?.chain?.id as number;
+
   const contract = useContract({
-    addressOrName: CONTRACT_ADDRESS[contractType],
-    contractInterface: CONTRACT_ABI[contractType],
+    address: CONTRACT_ADDRESS[chainId][contractType],
+    abi: CONTRACT_ABI[contractType],
     signerOrProvider: signer,
   });
+
+  console.log(contract);
 
   const { reward: confettiReward, isAnimating: isConfettiAnimating } =
     useReward("mintBtn", "confetti");
 
   const mint = async () => {
-    const tx = await contract.mint(count);
+    const tx = await contract?.mint(count);
     setTx(tx);
     setIsMinting(true);
 

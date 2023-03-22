@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@rainbow-me/rainbowkit": "^0.4.1",
+    "@rainbow-me/rainbowkit": "^0.12.2",
     "@splitbee/web": "^0.3.0",
     "ethers": "^5.6.9",
     "lodash": "^4.17.21",
@@ -19,7 +19,7 @@
     "react-github-btn": "^1.3.0",
     "react-rewards": "^2.0.4",
     "rooks": "^5.11.8",
-    "wagmi": "^0.5.6"
+    "wagmi": "^0.12.6"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.182",
