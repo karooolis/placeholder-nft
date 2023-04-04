@@ -3,7 +3,6 @@ import "@rainbow-me/rainbowkit/styles.css";
 import type { AppProps } from "next/app";
 import { RainbowKitProvider, getDefaultWallets } from "@rainbow-me/rainbowkit";
 import {
-  mainnet,
   goerli,
   sepolia,
   polygonMumbai,
@@ -18,7 +17,7 @@ import splitbee from "@splitbee/web";
 splitbee.init();
 
 const { chains, provider, webSocketProvider } = configureChains(
-  [mainnet, goerli, sepolia, polygonMumbai, bsc, bscTestnet],
+  [goerli, sepolia, polygonMumbai, bsc, bscTestnet],
   [publicProvider()]
 );
 
