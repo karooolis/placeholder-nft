@@ -12,13 +12,9 @@ contract PlaceholderNFTERC721A is ERC721A {
         _mint(msg.sender, quantity);
     }
 
-    function tokenURI(uint256 tokenId)
-        public
-        view
-        virtual
-        override
-        returns (string memory)
-    {
+    function tokenURI(
+        uint256 tokenId
+    ) public view virtual override returns (string memory) {
         if (!_exists(tokenId)) revert URIQueryForNonexistentToken();
 
         // Get all the JSON metadata in place and base64 encode it.

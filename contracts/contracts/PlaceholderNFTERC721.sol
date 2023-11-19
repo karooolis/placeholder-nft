@@ -25,13 +25,9 @@ contract PlaceholderNFTERC721 is ERC721URIStorage {
         }
     }
 
-    function tokenURI(uint256 tokenId)
-        public
-        view
-        virtual
-        override
-        returns (string memory)
-    {
+    function tokenURI(
+        uint256 tokenId
+    ) public view virtual override returns (string memory) {
         _requireMinted(tokenId);
 
         // Get all the JSON metadata in place and base64 encode it.
