@@ -116,6 +116,13 @@ const config: HardhatUserConfig = {
       gas: 6721975,
       gasPrice: 8000000000,
     },
+    scrollSepoliaTestnet: {
+      url: "https://sepolia-rpc.scroll.io",
+      chainId: 534351,
+      accounts: accounts,
+      gas: 2100000,
+      gasPrice: 8000000000,
+    },
   },
   xdeploy: {
     contract: "PlaceholderNFTERC1155",
