@@ -11,6 +11,8 @@ dotenv.config();
 const accounts =
   process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [];
 
+console.log("accounts", accounts);
+
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
 const config: HardhatUserConfig = {
@@ -116,9 +118,9 @@ const config: HardhatUserConfig = {
       gas: 6721975,
       gasPrice: 8000000000,
     },
-    scrollSepoliaTestnet: {
-      url: "https://sepolia-rpc.scroll.io",
-      chainId: 534351,
+    scroll: {
+      url: "https://rpc.scroll.io/",
+      chainId: 534352,
       accounts: accounts,
       gas: 2100000,
       gasPrice: 8000000000,
@@ -135,6 +137,7 @@ const config: HardhatUserConfig = {
       "bscTestnet",
       "optimismTestnet",
       "arbitrumTestnet",
+      "scroll",
     ],
     rpcUrls: [
       process.env.ETHEREUM_SEPOLIA_URL,
@@ -143,6 +146,7 @@ const config: HardhatUserConfig = {
       process.env.BINANCE_TESTNET_URL,
       process.env.OPTIMISM_GOERLI_URL,
       process.env.ARBITRUM_GOERLI_URL,
+      process.env.SCROLL_URL,
     ],
     gasLimit: 15000000,
   },
@@ -161,11 +165,22 @@ const config: HardhatUserConfig = {
       polygonMumbai: process.env.POLYGON_ETHERSCAN_API_KEY as string,
       bsc: process.env.BINANCE_ETHERSCAN_API_KEY as string,
       bscTestnet: process.env.BINANCE_ETHERSCAN_API_KEY as string,
+      scroll: process.env.SCROLL_ETHERSCAN_API_KEY as string,
       // optimismMain: process.env.OPTIMISM_ETHERSCAN_API_KEY as string,
       // optimismTestnet: process.env.OPTIMISM_ETHERSCAN_API_KEY as string,
       // arbitrumOne: process.env.ARBITRUM_ETHERSCAN_API_KEY as string,
       // arbitrumTestnet: process.env.ARBITRUM_ETHERSCAN_API_KEY as string,
     },
+    customChains: [
+      {
+        network: "scroll",
+        chainId: 534352,
+        urls: {
+          apiURL: "https://api.scrollscan.com/api",
+          browserURL: "https://scrollscan.com",
+        },
+      },
+    ],
   },
 };
 
